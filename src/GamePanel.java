@@ -1,3 +1,4 @@
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -13,6 +14,8 @@ import javax.swing.Timer;
 public class GamePanel extends JPanel implements ActionListener, KeyListener{
 Timer timer;	
 Font titleFont;
+Rocketship ship;
+ObjectManager manager;
 final int MENU_STATE = 0;
 final int GAME_STATE = 1;
 final int END_STATE = 2;
@@ -20,6 +23,10 @@ int currentState = MENU_STATE;
 public GamePanel(){
 	timer = new Timer(1000/60, this);
 	titleFont = new Font("Arial", Font.PLAIN, 48);
+	ship = new Rocketship(250, 700, 50, 50, 5);
+	manager = new ObjectManager();
+	
+	manager.addObject(ship);
 }
 public void startGame(){
 	timer.start();
@@ -64,6 +71,20 @@ public void keyPressed(KeyEvent e) {
 	if (currentState > END_STATE) {
 		currentState = MENU_STATE;
 	}
+	if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+		ship.x = ship.x + 5;
+	}
+	if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+		ship.x = ship.x - 5;
+	}
+	if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+		 ship.y = ship.y + 5;
+	}
+	if (e.getKeyCode() == KeyEvent.VK_UP) {
+		ship.y = ship.y - 5;
+	}
+	
+	
 }
 @Override
 public void keyReleased(KeyEvent e) {
@@ -75,7 +96,7 @@ public void updateMenuState(){
 }
 	
 public void updateGameState(){
-	
+	manager.update();
 }
 public void updateEndState(){
 	
@@ -90,6 +111,8 @@ public void drawMenuState(Graphics g){
 public void drawGameState(Graphics g){
 	g.setColor(Color.BLACK);
 	g.fillRect(0, 0, 500, 800);
+	manager.draw(g);
+	
 }
 public void drawEndState(Graphics g){
 	g.setColor(Color.MAGENTA);
