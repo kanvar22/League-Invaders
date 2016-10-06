@@ -83,7 +83,9 @@ public void keyPressed(KeyEvent e) {
 	if (e.getKeyCode() == KeyEvent.VK_UP) {
 		ship.y = ship.y - 5;
 	}
-	
+	if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+		manager.addObject(new Projectile(ship.x + ship.width/2 - 5,ship.y,10,10,20));
+	}
 	
 }
 @Override
@@ -97,6 +99,7 @@ public void updateMenuState(){
 	
 public void updateGameState(){
 	manager.update();
+	manager.manageEnemies();
 }
 public void updateEndState(){
 	

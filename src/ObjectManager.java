@@ -43,12 +43,12 @@ public class ObjectManager {
 		}
 	}
 
-//	public void manageEnemies(){
-//		if(System.currentTimeMillis() - enemyTimer >= enemySpawnTime){
-//			addObject(new Alien(new Random().nextInt(LeagueInvaders.WIDTH), 0, 50, 50));
-//			enemyTimer = System.currentTimeMillis();
-//		}
-//	}
+public void manageEnemies(){
+		if(System.currentTimeMillis() - enemyTimer >= enemySpawnTime){
+			addObject(new Alien(new Random().nextInt(LeagueInvaders.width), 0, 50, 50));
+			enemyTimer = System.currentTimeMillis();
+		}
+	}
 //
 //	public void checkCollision() {
 //		for (int i = 0; i < objects.size(); i++) {
