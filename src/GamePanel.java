@@ -72,26 +72,33 @@ public void keyPressed(KeyEvent e) {
 		currentState = MENU_STATE;
 	}
 	if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-		ship.x = ship.x + 5;
+		ship.xspeed = 10;
+		
 	}
 	if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-		ship.x = ship.x - 5;
+		ship.xspeed = -10;
+		
 	}
 	if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-		 ship.y = ship.y + 5;
+		ship.yspeed = -10;
+		
 	}
 	if (e.getKeyCode() == KeyEvent.VK_UP) {
-		ship.y = ship.y - 5;
+		ship.yspeed = 10;
+		
 	}
 	if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 		manager.addObject(new Projectile(ship.x + ship.width/2 - 5,ship.y,10,10,20));
 	}
-	
+	ship.speed = 10;
+	ship.x += ship.speed;
 }
 @Override
 public void keyReleased(KeyEvent e) {
 	// TODO Auto-generated method stub
 	System.out.println("Hey");
+	ship.yspeed = 0;
+	ship.xspeed = 0;
 }
 public void updateMenuState(){
 	

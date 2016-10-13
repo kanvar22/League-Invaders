@@ -5,13 +5,14 @@ public class LeagueInvaders {
 final int width = 500;
 final int height = 800;
 GamePanel Game;
+static LeagueInvaders invaders;
 public LeagueInvaders(){
 	frame = new JFrame();
 Game = new GamePanel();
 	setup();
 }
 public static void main(String[] args) {
-	LeagueInvaders invaders = new LeagueInvaders();
+	 invaders = new LeagueInvaders();
 }
 public void setup(){
 	frame.add(Game);
