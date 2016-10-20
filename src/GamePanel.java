@@ -72,33 +72,45 @@ public void keyPressed(KeyEvent e) {
 		currentState = MENU_STATE;
 	}
 	if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-		ship.xspeed = 10;
+		ship.xspeed += ship.speed;
 		
 	}
 	if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-		ship.xspeed = -10;
+		ship.xspeed -= ship.speed;
 		
 	}
 	if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-		ship.yspeed = -10;
+		ship.yspeed += ship.speed;
 		
 	}
 	if (e.getKeyCode() == KeyEvent.VK_UP) {
-		ship.yspeed = 10;
+		ship.yspeed -= ship.speed;
 		
 	}
 	if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 		manager.addObject(new Projectile(ship.x + ship.width/2 - 5,ship.y,10,10,20));
 	}
-	ship.speed = 10;
-	ship.x += ship.speed;
 }
 @Override
 public void keyReleased(KeyEvent e) {
 	// TODO Auto-generated method stub
 	System.out.println("Hey");
-	ship.yspeed = 0;
-	ship.xspeed = 0;
+	if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+		ship.xspeed -= ship.speed;
+		
+	}
+	if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+		ship.xspeed += ship.speed;
+		
+	}
+	if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+		ship.yspeed -= ship.speed;
+		
+	}
+	if (e.getKeyCode() == KeyEvent.VK_UP) {
+		ship.yspeed += ship.speed;
+		
+	}
 }
 public void updateMenuState(){
 	
@@ -107,6 +119,13 @@ public void updateMenuState(){
 public void updateGameState(){
 	manager.update();
 	manager.manageEnemies();
+	manager.checkCollision();
+	if (!ship.isAlive) {
+		currentState = END_STATE;
+		manager.reset();
+		ship = new Rocketship(250, 700, 50, 50, 5);
+		manager.addObject(ship);
+	}
 }
 public void updateEndState(){
 	
@@ -128,6 +147,7 @@ public void drawEndState(Graphics g){
 	g.setColor(Color.MAGENTA);
 	g.setFont(titleFont);
 	g.drawString("Game Over", 120, 400);
+	g.drawString("You shot "+ manager.getScore() + " aliens", 50, 50);
 }
 
 }
